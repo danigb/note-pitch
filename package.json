@@ -1,6 +1,6 @@
 {
   "name": "note-pitch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Transpose notes",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,7 @@
     "vows": "^0.8.1"
   },
   "dependencies": {
+    "intervalo": "^0.3.0",
     "note-parse": "^0.2.0"
   }
 }

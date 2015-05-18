@@ -8,12 +8,10 @@ var pitch.transpose('e4', 'M2');    // => 'f#4'
 var pitch.transpose('c2', ["P1","M2","M3"]) // => ['c2', 'd2', 'e2']
 ```
 
-Basically this library can do three things:
+Basically this library can do two things:
 - Get the pitch number of a note (MIDI number)
 - Transpose a note by an interval
-- Get the interval between two notes
 
-It uses [intervalo](http://github.com/danigb/invtervalo) to work with intervals.
 
 ## Installation
 

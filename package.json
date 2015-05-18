@@ -1,0 +1,25 @@
+{
+  "name": "note-pitch",
+  "version": "0.1.0",
+  "description": "Transpose notes",
+  "main": "index.js",
+  "scripts": {
+    "test": "vows test/*.js"
+  },
+  "keywords": [
+    "note",
+    "transpose",
+    "music",
+    "theory",
+    "soflege",
+    "interval"
+  ],
+  "author": "danigb",
+  "license": "MIT",
+  "devDependencies": {
+    "vows": "^0.8.1"
+  },
+  "dependencies": {
+    "note-parse": "^0.2.0"
+  }
+}

@@ -3,10 +3,7 @@
 var Interval = require('interval-parser');
 var Note = require('note-parser');
 
-var PITCH_CLASSES = "cdefgabcdefgab";
 var SEMITONES = {c: 0, d: 2, e: 4, f: 5, g: 7, a: 9, b: 11 }
-var ACCIDENTALS = ['bb', 'b', '', '#', '##']
-
 var pitch = function(note) {
   note = Note(note);
   var alter = note.accidentals.length;
@@ -19,34 +16,23 @@ pitch.semitones = function(a, b) {
 }
 
 /*
- * pitch.interval
+ * pitch.distance
  *
- * find the interval between two notes
+ * return intervals between notes
  */
-var CHANGE = {
-  'minor': ['d', 'm', 'M', 'A'],
-  'perfect': ['d', 'P', 'A']
-}
-pitch.interval = function(a, b) {
-  var a = Note(a);
-  var b = Note(b);
-  var semitones = pitch.semitones(a, b);
-  var dir = semitones < 0 ? -1 : 1;
-  var pitchDistance = dir > 0 ? pitchNum(b) - pitchNum(a) + 1 :
-    pitchNum(b) - pitchNum(a) - 8;
-
-  var i = Interval("d" + pitchDistance);
-  var octaves = semitones / 12 | 0;
-  if (octaves == -1) octaves = 0;
-  var difference = dir * (semitones - i.semitones - 12 * octaves);
-  var dest = CHANGE[i.type][difference] + (pitchDistance + 7 * octaves);
-  return dest;
-}
-
-
-function pitchNum(note) {
-  var num = Note(note).pitchClass.charCodeAt(0);
-  return (num < 99) ? num + 7 : num;
+pitch.distance = function(root, notes) {
+  root = Note(root);
+  if(arguments.length == 1) {
+    return function(note) {
+      return interval(root, note);
+    }
+  } else if (Array.isArray(notes)) {
+    return notes.map(function(i) {
+      return interval(root, i);
+    });
+  } else {
+    return interval(root, notes);
+  }
 }
 
 pitch.transpose = function(note, interval) {
@@ -64,6 +50,39 @@ pitch.transpose = function(note, interval) {
   }
 }
 
+var CHANGE = {
+  'minor': ['d', 'm', 'M', 'A'],
+  'perfect': ['d', 'P', 'A']
+}
+function interval(a, b) {
+  a = Note(a);
+  b = Note(b);
+  var semitones = pitch.semitones(a, b);
+  var dir = semitones < 0 ? -1 : 1;
+  var pitchDistance = pitchDist(a, b) + dir;
+  if(dir < 0) pitchDistance -= 7;
+
+  var i = Interval("d" + pitchDistance);
+  var octaves = semitones / 12 | 0;
+  if (octaves == -1) octaves = 0;
+  var difference = dir * (semitones - i.semitones - 12 * octaves);
+  var dest = CHANGE[i.type][difference] + (pitchDistance + 7 * octaves);
+  return dest;
+}
+
+function pitchDist(a, b) {
+  var first = PITCH_CLASSES.indexOf(Note(a).pitchClass);
+  var second = PITCH_CLASSES.indexOf(Note(b).pitchClass, first);
+  return second - first;
+}
+
+function pitchNum(note) {
+  var num = Note(note).pitchClass.charCodeAt(0);
+  return (num < 99) ? num + 7 : num;
+}
+
+var PITCH_CLASSES = "cdefgabcdefgab";
+var ACCIDENTALS = ['bb', 'b', '', '#', '##']
 function transpose(note, interval) {
   note = Note(note);
   interval = Interval(interval);

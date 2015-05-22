@@ -60,12 +60,22 @@ pitch.transpose('c2', ['P1', 'M2', 'm3']); // => ["c2", "d2", "eb3"]
 pitch.transpose('a2', ['P1', 'M3', 'P5']); // => ["a2", "c#3", "e3"]
 ```
 
-### pitch.interval(noteA, noteB)
+### pitch.distance(root, notes)
 
-Returns the distance between noteA and noteB as an interval string ('P8', 'm-2')
+Returns the distance between a root note and a list of notes:
 
 ```js
-pitch.interval('c2', 'd2'); // => "M2"
+pitch.distance('c2', 'd2'); // => "M2"
+pitch.distance('c2', ['c2', 'd2', 'e2']); // => ['P1', 'M2', 'M3']
+```
+
+If you skip the notes, you get a _distancer_, a function that returns the
+distance from the root to another note:
+
+```js
+var distance = pitch.distance('c2');
+distance('c2'); // => 'P1'
+distance('d2'); // => 'M2'
 ```
 
 ## License

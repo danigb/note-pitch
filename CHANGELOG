@@ -1,5 +1,11 @@
+[MASTER]
+
+[0.3.0]
+- Rename pitch.interval to pitch.distance
+- pitch.distance bugs
+
 [0.2.0]
-- Add pitch.distance method
+- Add pitch.interval method
 - Add pitch.semitones method
 - Update dependencies
 

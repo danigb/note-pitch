@@ -20,7 +20,7 @@
     "vows": "^0.8.1"
   },
   "dependencies": {
-    "interval-parser": "^0.6.0",
+    "interval-parser": "^0.7.0",
     "note-parser": "^0.3.0"
   }
 }

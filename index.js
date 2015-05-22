@@ -14,6 +14,41 @@ var pitch = function(note) {
   return SEMITONES[note.pitchClass] + alter + 12 * (note.octave + 1);
 }
 
+pitch.semitones = function(a, b) {
+  return pitch(b) - pitch(a);
+}
+
+/*
+ * pitch.interval
+ *
+ * find the interval between two notes
+ */
+var CHANGE = {
+  'minor': ['d', 'm', 'M', 'A'],
+  'perfect': ['d', 'P', 'A']
+}
+pitch.interval = function(a, b) {
+  var a = Note(a);
+  var b = Note(b);
+  var semitones = pitch.semitones(a, b);
+  var dir = semitones < 0 ? -1 : 1;
+  var pitchDistance = dir > 0 ? pitchNum(b) - pitchNum(a) + 1 :
+    pitchNum(b) - pitchNum(a) - 8;
+
+  var i = Interval("d" + pitchDistance);
+  var octaves = semitones / 12 | 0;
+  if (octaves == -1) octaves = 0;
+  var difference = dir * (semitones - i.semitones - 12 * octaves);
+  var dest = CHANGE[i.type][difference] + (pitchDistance + 7 * octaves);
+  return dest;
+}
+
+
+function pitchNum(note) {
+  var num = Note(note).pitchClass.charCodeAt(0);
+  return (num < 99) ? num + 7 : num;
+}
+
 pitch.transpose = function(note, interval) {
   if(arguments.length == 1) {
     interval = note;

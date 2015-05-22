@@ -1,4 +1,6 @@
-
+[0.2.0]
+- Add pitch.distance method
+- Add pitch.semitones method
 - Update dependencies
 
 [0.1.0]

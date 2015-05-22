@@ -25,20 +25,17 @@ npm install note-pitch
 
 Returns the MIDI number of that note.
 
-With this method you can calculate, for example, the distance in semitones
-between two notes:
-
-```js
-function distance(noteA, noteB) { return pitch(noteB) - pitch(noteA); }
-```
-
-Or test if some notes are enharmonic:
+With this method you can calculate, for example, if two notes are enharmonic:
 
 ```js
 function areEnharmonic(noteA, noteB) { return pitch(noteA) === pitch(noteB); }
 ```
 
-### transpose(note, interval)
+### pitch.semitones(noteA, noteB)
+
+Returns the distance in semitones between noteA and noteB (can be positive or negative number)
+
+### pitch.transpose(note, interval)
 
 Transpose the given note by a interval:
 
@@ -61,6 +58,14 @@ Also, you can specify an array of intervals, ideal for building chords or scales
 ```js
 pitch.transpose('c2', ['P1', 'M2', 'm3']); // => ["c2", "d2", "eb3"]
 pitch.transpose('a2', ['P1', 'M3', 'P5']); // => ["a2", "c#3", "e3"]
+```
+
+### pitch.interval(noteA, noteB)
+
+Returns the distance between noteA and noteB as an interval string ('P8', 'm-2')
+
+```js
+pitch.interval('c2', 'd2'); // => "M2"
 ```
 
 ## License

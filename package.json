@@ -1,7 +1,7 @@
 {
   "name": "note-pitch",
-  "version": "0.1.1",
-  "description": "Transpose notes",
+  "version": "0.2.0",
+  "description": "Musical note pitch manipulation",
   "main": "index.js",
   "scripts": {
     "test": "vows test/*.js"
@@ -14,7 +14,7 @@
     "soflege",
     "interval"
   ],
-  "author": "danigb",
+  "author": "danigb <danigb@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "vows": "^0.8.1"

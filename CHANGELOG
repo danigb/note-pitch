@@ -1,5 +1,6 @@
-[0.5.1]
+[0.5.1]-[0.5.3]
 - Fix a problem with package.json
+- Fix a bug with Note.pitch
 
 [0.5.0]
 - Extends note-parser capabilities

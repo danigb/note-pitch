@@ -1,6 +1,6 @@
 {
   "name": "note-pitch",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Musical note pitch manipulation",
   "main": "index.js",
   "scripts": {

@@ -6,7 +6,7 @@ var parse = require('note-parser')
 var Note = {}
 
 Note.parse = function (note) {
-  return parse(note)
+  return parse.apply(null, arguments)
 }
 
 Note.semitones = function (a, b) {

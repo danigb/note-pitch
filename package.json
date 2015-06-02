@@ -1,6 +1,6 @@
 {
   "name": "note-pitch",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Musical note pitch manipulation",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,7 @@
     "vows": "^0.8.1"
   },
   "dependencies": {
-    "interval-parser": "^0.7.0"
+    "interval-parser": "^0.7.0",
+    "note-parser": "^0.8.0"
   }
 }

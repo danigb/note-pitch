@@ -1,4 +1,6 @@
-[MASTER]
+
+[0.4.0]
+- Move to standard js style
 
 [0.3.0]
 - Rename pitch.interval to pitch.distance

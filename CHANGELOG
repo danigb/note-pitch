@@ -1,7 +1,11 @@
+[0.5.1]
+- Fix a problem with package.json
 
-[0.4.0]
+[0.5.0]
 - Extends note-parser capabilities
 - New api: Note.parse, Note.semitones, Note.transpose, Note.distance
+
+[0.4.0]
 - Update note-parser
 - Move to standard js style
 

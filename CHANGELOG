@@ -1,3 +1,6 @@
+[0.6.0]
+- .transpose returns null if note is not a note
+
 [0.5.1]-[0.5.3]
 - Fix a problem with package.json
 - Fix a bug with Note.pitch

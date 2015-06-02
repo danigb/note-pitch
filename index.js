@@ -77,7 +77,8 @@ function pitchDist (a, b) {
 var PITCH_CLASSES = 'cdefgabcdefgab'
 var ACCIDENTALS = ['bb', 'b', '', '#', '##']
 function transpose (note, interval) {
-  note = parse(note)
+  note = parse(note, null, null)
+  if (!note) return null;
   interval = Interval(interval)
   var pitchIndex = PITCH_CLASSES.indexOf(note.pc)
   var pc = PITCH_CLASSES[pitchIndex + interval.simple - 1]

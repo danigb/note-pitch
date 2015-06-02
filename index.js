@@ -1,18 +1,16 @@
 'use strict'
 
 var Interval = require('interval-parser')
-var Note = require('note-parser')
+var parse = require('note-parser')
 
-var SEMITONES = {c: 0, d: 2, e: 4, f: 5, g: 7, a: 9, b: 11 }
-var pitch = function (note) {
-  note = Note(note)
-  var alter = note.accidentals.length
-  if (note.accidentals[0] === 'b') alter = -1 * alter
-  return SEMITONES[note.pitchClass] + alter + 12 * (note.octave + 1)
+var Note = {}
+
+Note.parse = function (note) {
+  return parse(note)
 }
 
-pitch.semitones = function (a, b) {
-  return pitch(b) - pitch(a)
+Note.semitones = function (a, b) {
+  return parse(b).midi - parse(a).midi
 }
 
 /*
@@ -20,8 +18,8 @@ pitch.semitones = function (a, b) {
  *
  * return intervals between notes
  */
-pitch.distance = function (root, notes) {
-  root = Note(root)
+Note.distance = function (root, notes) {
+  root = parse(root)
   if (arguments.length === 1) {
     return function (note) {
       return interval(root, note)
@@ -35,7 +33,7 @@ pitch.distance = function (root, notes) {
   }
 }
 
-pitch.transpose = function (note, interval) {
+Note.transpose = function (note, interval) {
   if (arguments.length === 1) {
     interval = note
     return function (note) {
@@ -55,9 +53,9 @@ var CHANGE = {
   'perfect': ['d', 'P', 'A']
 }
 function interval (a, b) {
-  a = Note(a)
-  b = Note(b)
-  var semitones = pitch.semitones(a, b)
+  a = parse(a)
+  b = parse(b)
+  var semitones = b.midi - a.midi
   var dir = semitones < 0 ? -1 : 1
   var pitchDistance = pitchDist(a, b) + dir
   if (dir < 0) pitchDistance -= 7
@@ -71,24 +69,24 @@ function interval (a, b) {
 }
 
 function pitchDist (a, b) {
-  var first = PITCH_CLASSES.indexOf(Note(a).pitchClass)
-  var second = PITCH_CLASSES.indexOf(Note(b).pitchClass, first)
+  var first = PITCH_CLASSES.indexOf(parse(a).pc)
+  var second = PITCH_CLASSES.indexOf(parse(b).pc, first)
   return second - first
 }
 
 var PITCH_CLASSES = 'cdefgabcdefgab'
 var ACCIDENTALS = ['bb', 'b', '', '#', '##']
 function transpose (note, interval) {
-  note = Note(note)
+  note = parse(note)
   interval = Interval(interval)
-  var pitchIndex = PITCH_CLASSES.indexOf(note.pitchClass)
-  var pitchClass = PITCH_CLASSES[pitchIndex + interval.simple - 1]
-  var dest = Note(pitchClass + (note.octave + interval.octaves))
-  var difference = interval.semitones - (pitch(dest) - pitch(note))
+  var pitchIndex = PITCH_CLASSES.indexOf(note.pc)
+  var pc = PITCH_CLASSES[pitchIndex + interval.simple - 1]
+  var dest = parse(pc + (note.oct + interval.octaves))
+  var difference = interval.semitones - (dest.midi - note.midi)
   var reduced = difference % 12
   var octaves = (difference - reduced) / 12
   var accidentals = ACCIDENTALS[reduced + 2]
-  return dest.pitchClass + accidentals + (dest.octave + octaves)
+  return dest.pc + accidentals + (dest.oct + octaves)
 }
 
-module.exports = pitch
+module.exports = Note

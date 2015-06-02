@@ -1,10 +1,14 @@
 {
   "name": "note-pitch",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "Musical note pitch manipulation",
   "main": "index.js",
   "scripts": {
     "test": "vows test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danigb/note-pitch.git"
   },
   "keywords": [
     "note",
@@ -16,11 +20,15 @@
   ],
   "author": "danigb <danigb@gmail.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danigb/note-pitch/issues"
+  },
+  "homepage": "https://github.com/danigb/note-pitch#readme",
   "devDependencies": {
     "vows": "^0.8.1"
   },
   "dependencies": {
     "interval-parser": "^0.7.0",
-    "note-parser": "^0.4.0"
+    "note-pitch": "^0.8.0"
   }
 }

@@ -1,5 +1,8 @@
 
 [0.4.0]
+- Extends note-parser capabilities
+- New api: Note.parse, Note.semitones, Note.transpose, Note.distance
+- Update note-parser
 - Move to standard js style
 
 [0.3.0]

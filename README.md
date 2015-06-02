@@ -5,7 +5,7 @@
 
 Extends [note-parser](http://github.com/danigb/note-parser) to add note pitch manipulation.
 
-Because is an extension of note-parser, you can parse notes:
+As an extension of note-parser, you can parse notes:
 
 ```js
 var Note = require('note-pitch');
@@ -28,15 +28,24 @@ Note.distance('c', ['c', 'd', 'eb', 'f', 'g']); // => ['P1', 'M2', 'm3', 'P4', '
 
 ## Installation
 
-```bash
-npm install note-pitch
+Install the module: `npm i --save note-pitch` and require it:
+
+```js
+var Note = require('note-pitch');
 ```
+
+If you want to use it inside a browser you will need a node module compatible
+packager (like browserify or webpack).
+
+This is part of a higher level library
+that performs transpositions (and much more) ready to browser:
+[ScoreJs](http://github.com/danigb/ScoreJS)
 
 ## API
 
 ### Note.parse(note)
 
-Returns the note as parsed object. It uses note-parser's parser.
+Returns the note as parsed object.
 See [note-parser](http://github.com/danigb/note-parser) for more information.
 
 ### Note.semitones(noteA, noteB)

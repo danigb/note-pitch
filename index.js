@@ -78,11 +78,14 @@ var PITCH_CLASSES = 'cdefgabcdefgab'
 var ACCIDENTALS = ['bb', 'b', '', '#', '##']
 function transpose (note, interval) {
   note = parse(note, null, null)
-  if (!note) return null;
+  if (!note) return null
   interval = Interval(interval)
   var pitchIndex = PITCH_CLASSES.indexOf(note.pc)
-  var pc = PITCH_CLASSES[pitchIndex + interval.simple - 1]
-  var dest = parse(pc + (note.oct + interval.octaves))
+  var pitchDest = pitchIndex + interval.simple - 1
+  var pc = PITCH_CLASSES[pitchDest]
+  var octOffset = interval.octaves
+  if (pitchDest > 6) octOffset++
+  var dest = parse(pc + (note.oct + octOffset))
   var difference = interval.semitones - (dest.midi - note.midi)
   var reduced = difference % 12
   var octaves = (difference - reduced) / 12

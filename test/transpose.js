@@ -9,6 +9,7 @@ vows.describe('Pitch transpose').addBatch({
     assert.equal(Note.transpose('c2', 'M16'), 'd4')
     assert.equal(Note.transpose('e2', 'M2'), 'f#2')
     assert.equal(Note.transpose('a2', 'M3'), 'c#3')
+    assert.equal(Note.transpose('a2', 'd5'), 'eb3')
   },
   'no note transposition': function () {
     assert.equal(Note.transpose('x', 'M2'), null)

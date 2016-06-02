@@ -1,7 +1,12 @@
+## *** deprecated: use [tonal](http://github.com/danigb/tonal) ***
+
+__This library is not longer maintained.__
+
 # note-pitch
 
 [![Code Climate](https://codeclimate.com/github/danigb/note-pitch/badges/gpa.svg)](https://codeclimate.com/github/danigb/note-pitch)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+
 
 Extends [note-parser](http://github.com/danigb/note-parser) to add note pitch manipulation.
 
